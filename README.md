@@ -1,2 +1,3 @@
-# Udemy_FullAndroidDevelopmentMasterclass-
+# Full Android Development Masterclass
+
 Full Android Development Masterclass playground
