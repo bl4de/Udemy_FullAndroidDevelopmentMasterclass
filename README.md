@@ -1,3 +1,7 @@
-# Full Android Development Masterclass
+## Full Android Development Masterclass
 
-Full Android Development Masterclass playground
+Udemy Full Android Development Masterclass playground
+
+## Resources
+
+https://www.ragingrock.com/AndroidAppRE
