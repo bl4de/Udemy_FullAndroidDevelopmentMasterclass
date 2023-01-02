@@ -5,15 +5,16 @@
     android:id="@+id/layoutMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
     android:padding="10dp"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textMain"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="40dp"
         android:text="TextView" />
 
     <EditText
@@ -22,7 +23,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Enter some text"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textColorHint="@color/purple_200" />
 
     <Button
         android:id="@+id/btnOne"
