@@ -13,7 +13,7 @@
     <ImageView
         android:id="@+id/neuromancer"
         android:layout_width="248dp"
-        android:layout_height="200dp"
+        android:layout_height="89dp"
         app:srcCompat="@drawable/neuromancer_cyberpunk_ghostintheshell_akira_william_gibson" />
 
     <TextView
@@ -39,5 +39,36 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal|center_vertical"
         android:text="Ok" />
+
+    <CheckBox
+        android:id="@+id/audiCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Audi" />
+
+    <CheckBox
+        android:id="@+id/bmwCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BMW" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="119dp">
+
+        <RadioButton
+            android:id="@+id/radioButtonAudiRS5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Audi RS5" />
+
+        <RadioButton
+            android:id="@+id/radioButtonAudiS5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Audi S5" />
+    </RadioGroup>
 
 </LinearLayout>
