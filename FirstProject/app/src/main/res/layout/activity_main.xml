@@ -1,74 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layoutMain"
+    android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="10dp"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/neuromancer"
-        android:layout_width="248dp"
-        android:layout_height="89dp"
-        app:srcCompat="@drawable/neuromancer_cyberpunk_ghostintheshell_akira_william_gibson" />
-
-    <TextView
-        android:id="@+id/textMain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="40dp"
-        android:text="TextView" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter some text"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textColorHint="#7C4DFF" />
-
-    <Button
-        android:id="@+id/btnOne"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="Ok" />
-
-    <CheckBox
-        android:id="@+id/audiCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="Audi" />
-
-    <CheckBox
-        android:id="@+id/bmwCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="BMW" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="119dp">
-
-        <RadioButton
-            android:id="@+id/radioButtonAudiRS5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Audi RS5" />
-
-        <RadioButton
-            android:id="@+id/radioButtonAudiS5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Audi S5" />
-    </RadioGroup>
-
-</LinearLayout>
+    <ListView
+        android:id="@+id/countriesList"
+        android:layout_width="409dp"
+        android:layout_height="601dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

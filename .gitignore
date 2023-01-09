@@ -1,3 +1,4 @@
 Android-Applications/
-./**/.idea/
+./**/.idea/*.*
+*.swp
 
