@@ -44,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
 
         chestResult = findViewById(R.id.chestResult);
 
-        calculateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                wristCircumferenceValue = Double.parseDouble(wristCircumference.getText().toString());
-
-                chestResult.setText(chestResult.getText() + " " + String.valueOf(calculateChestCircumference()) + " cm.");
-            }
+        calculateBtn.setOnClickListener(v -> {
+            wristCircumferenceValue = Double.parseDouble(wristCircumference.getText().toString());
+            showCalculatedResults();
         });
+    }
+
+    private void showCalculatedResults() {
+        chestResult.setText("Chest: " + String.valueOf(calculateChestCircumference()) + " cm.");
     }
 
     private double calculateChestCircumference() {
