@@ -8,41 +8,43 @@
 
     <EditText
         android:id="@+id/wristCircumference"
-        android:layout_width="380dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="14dp"
+        android:layout_width="382dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="109dp"
         android:ems="10"
         android:hint="Your wrist circumference in cm:"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/calculateBtn"
+        app:layout_constraintBottom_toTopOf="@+id/gridView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/calculateBtn"
-        android:layout_width="163dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="69dp"
+        android:layout_width="225dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="14dp"
         android:gravity="center_horizontal|center_vertical"
         android:text="Calculate"
-        app:layout_constraintBottom_toTopOf="@+id/chestResult"
+        app:layout_constraintBottom_toTopOf="@+id/gridView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wristCircumference" />
+        app:layout_constraintTop_toBottomOf="@+id/wristCircumference"
+        app:layout_constraintVertical_bias="0.256" />
 
-    <TextView
-        android:id="@+id/chestResult"
-        android:layout_width="140dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="402dp"
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="408dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
         android:gravity="center"
-        android:text="Chest"
+        android:numColumns="2"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calculateBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/wristCircumference">
+
+    </GridView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.GridView;
+
+import java.util.ArrayList;
 
 /*
 Method for calculating ideal body measurements
@@ -26,13 +28,21 @@ hips = chest x 0.85
 public class MainActivity extends AppCompatActivity {
 
     private static final double WRIST_TO_CHEST = 6.5;
+    private static final double ARM_TO_CHEST = 0.36;
+    private static final double FOREARM_TO_CHEST = 0.29;
+    private static final double THIGH_TO_CHEST = 0.53;
+    private static final double CALF_TO_CHEST = 0.34;
+    private static final double WAIST_TO_CHEST = 0.7;
+    private static final double NECK_TO_CHEST = 0.37;
+    private static final double HIPS_TO_CHEST = 0.85;
 
+    ArrayList<String> results = new ArrayList<>();
     EditText wristCircumference;
     Double wristCircumferenceValue;
+    String metricSystemSuffix = " cm";
 
-    TextView chestResult;
     Button calculateBtn;
-
+    GridView gridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,20 +51,32 @@ public class MainActivity extends AppCompatActivity {
 
         wristCircumference = findViewById(R.id.wristCircumference);
         calculateBtn = findViewById(R.id.calculateBtn);
-
-        chestResult = findViewById(R.id.chestResult);
+        gridView = findViewById(R.id.gridView);
 
         calculateBtn.setOnClickListener(v -> {
+            results.clear();
             wristCircumferenceValue = Double.parseDouble(wristCircumference.getText().toString());
+
+            results.add("Chest: " + String.valueOf(wristCircumferenceValue * WRIST_TO_CHEST) + metricSystemSuffix);
+            results.add("Biceps: " + String.valueOf(calculateCircumference(ARM_TO_CHEST)) + metricSystemSuffix);
+            results.add("Forearm: " + String.valueOf(calculateCircumference(FOREARM_TO_CHEST)) + metricSystemSuffix);
+            results.add("Thigh: " + String.valueOf(calculateCircumference(THIGH_TO_CHEST)) + metricSystemSuffix);
+            results.add("Calf: " + String.valueOf(calculateCircumference(CALF_TO_CHEST)) + metricSystemSuffix);
+            results.add("Waist: " + String.valueOf(calculateCircumference(WAIST_TO_CHEST)) + metricSystemSuffix);
+            results.add("Neck: " + String.valueOf(calculateCircumference(NECK_TO_CHEST)) + metricSystemSuffix);
+            results.add("Hips: " + String.valueOf(calculateCircumference(HIPS_TO_CHEST)) + metricSystemSuffix);
+
             showCalculatedResults();
         });
     }
 
     private void showCalculatedResults() {
-        chestResult.setText("Chest: " + String.valueOf(calculateChestCircumference()) + " cm.");
+        ResultsGridAdapter gridAdapter = new ResultsGridAdapter(this, results);
+        gridView.setAdapter(gridAdapter);
     }
 
-    private double calculateChestCircumference() {
-        return wristCircumferenceValue * MainActivity.WRIST_TO_CHEST;
+    private String calculateCircumference(double factor) {
+        Double chestCircumference = wristCircumferenceValue * WRIST_TO_CHEST;
+        return String.format("%.1f", chestCircumference * factor);
     }
 }
