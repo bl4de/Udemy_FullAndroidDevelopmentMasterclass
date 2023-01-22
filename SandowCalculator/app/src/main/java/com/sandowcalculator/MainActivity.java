@@ -2,6 +2,7 @@ package com.sandowcalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +13,8 @@ import java.util.ArrayList;
 
 /*
 Method for calculating ideal body measurements
-There are various ways of calculating your ideal body measurements. John McCallum's formula is the most widely-used method, let's see how it works.
+There are various ways of calculating your ideal body measurements.
+John McCallum's formula is the most widely-used method, let's see how it works.
 
 This formula uses the wrist measurement to work out the measurements for other parts of the body:
 
@@ -75,8 +77,9 @@ public class MainActivity extends AppCompatActivity {
         gridView.setAdapter(gridAdapter);
     }
 
+    @SuppressLint("DefaultLocale")
     private String calculateCircumference(double factor) {
-        Double chestCircumference = wristCircumferenceValue * WRIST_TO_CHEST;
+        double chestCircumference = wristCircumferenceValue * WRIST_TO_CHEST;
         return String.format("%.1f", chestCircumference * factor);
     }
 }
