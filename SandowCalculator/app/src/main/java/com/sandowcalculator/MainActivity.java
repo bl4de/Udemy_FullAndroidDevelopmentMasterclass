@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.d("Message","Application onCreate() executed");
         wristCircumference = findViewById(R.id.wristCircumference);
         calculateBtn = findViewById(R.id.calculateBtn);
         gridView = findViewById(R.id.gridView);
