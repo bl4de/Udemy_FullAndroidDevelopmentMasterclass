@@ -3,12 +3,15 @@ package com.sandowcalculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -47,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     Button calculateBtn;
     GridView gridView;
 
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
 
         calculateBtn.setOnClickListener(v -> {
             results.clear();
+            this.saveData(wristCircumference.getText().toString());
             wristCircumferenceValue = Double.parseDouble(wristCircumference.getText().toString());
+
 
             results.add("Chest: " + String.valueOf(wristCircumferenceValue * WRIST_TO_CHEST) + metricSystemSuffix);
             results.add("Biceps: " + String.valueOf(calculateCircumference(ARM_TO_CHEST)) + metricSystemSuffix);
@@ -71,7 +78,14 @@ public class MainActivity extends AppCompatActivity {
             results.add("Hips: " + String.valueOf(calculateCircumference(HIPS_TO_CHEST)) + metricSystemSuffix);
 
             showCalculatedResults();
+            Toast.makeText(this, "Done! Wrist circumference was saved also.", Toast.LENGTH_SHORT).show();
         });
+    }
+
+    public void saveData(String wristCircumferenceValue) {
+        sharedPreferences = getSharedPreferences("saveData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("wristCircumference", wristCircumferenceValue);
     }
 
     private void showCalculatedResults() {
