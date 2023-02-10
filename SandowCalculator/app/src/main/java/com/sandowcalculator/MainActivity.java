@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> results = new ArrayList<>();
     EditText wristCircumference;
-    Double wristCircumferenceValue;
+    String wristCircumferenceValue;
+    String savedWristCircumferenceValue;
     String metricSystemSuffix = " cm";
 
     Button calculateBtn;
@@ -61,24 +62,31 @@ public class MainActivity extends AppCompatActivity {
         wristCircumference = findViewById(R.id.wristCircumference);
         calculateBtn = findViewById(R.id.calculateBtn);
         gridView = findViewById(R.id.gridView);
+        savedWristCircumferenceValue = this.retrieveData();
+        if (savedWristCircumferenceValue != null) {
+            wristCircumferenceValue = savedWristCircumferenceValue;
+        }
 
         calculateBtn.setOnClickListener(v -> {
             results.clear();
-            this.saveData(wristCircumference.getText().toString());
-            wristCircumferenceValue = Double.parseDouble(wristCircumference.getText().toString());
+            wristCircumferenceValue = wristCircumference.getText().toString();
 
+            if (!wristCircumferenceValue.isEmpty()) {
+                this.saveData(wristCircumferenceValue);
+                results.add("Chest: " + String.valueOf(Double.parseDouble(wristCircumferenceValue) * WRIST_TO_CHEST) + metricSystemSuffix);
+                results.add("Biceps: " + String.valueOf(calculateCircumference(ARM_TO_CHEST)) + metricSystemSuffix);
+                results.add("Forearm: " + String.valueOf(calculateCircumference(FOREARM_TO_CHEST)) + metricSystemSuffix);
+                results.add("Thigh: " + String.valueOf(calculateCircumference(THIGH_TO_CHEST)) + metricSystemSuffix);
+                results.add("Calf: " + String.valueOf(calculateCircumference(CALF_TO_CHEST)) + metricSystemSuffix);
+                results.add("Waist: " + String.valueOf(calculateCircumference(WAIST_TO_CHEST)) + metricSystemSuffix);
+                results.add("Neck: " + String.valueOf(calculateCircumference(NECK_TO_CHEST)) + metricSystemSuffix);
+                results.add("Hips: " + String.valueOf(calculateCircumference(HIPS_TO_CHEST)) + metricSystemSuffix);
 
-            results.add("Chest: " + String.valueOf(wristCircumferenceValue * WRIST_TO_CHEST) + metricSystemSuffix);
-            results.add("Biceps: " + String.valueOf(calculateCircumference(ARM_TO_CHEST)) + metricSystemSuffix);
-            results.add("Forearm: " + String.valueOf(calculateCircumference(FOREARM_TO_CHEST)) + metricSystemSuffix);
-            results.add("Thigh: " + String.valueOf(calculateCircumference(THIGH_TO_CHEST)) + metricSystemSuffix);
-            results.add("Calf: " + String.valueOf(calculateCircumference(CALF_TO_CHEST)) + metricSystemSuffix);
-            results.add("Waist: " + String.valueOf(calculateCircumference(WAIST_TO_CHEST)) + metricSystemSuffix);
-            results.add("Neck: " + String.valueOf(calculateCircumference(NECK_TO_CHEST)) + metricSystemSuffix);
-            results.add("Hips: " + String.valueOf(calculateCircumference(HIPS_TO_CHEST)) + metricSystemSuffix);
-
-            showCalculatedResults();
-            Toast.makeText(this, "Done! Wrist circumference was saved also.", Toast.LENGTH_SHORT).show();
+                showCalculatedResults();
+                Toast.makeText(this, "Done! Wrist circumference was saved also.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Please provide wrist circumference", Toast.LENGTH_LONG).show();
+            }
         });
     }
 
@@ -88,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("wristCircumference", wristCircumferenceValue);
     }
 
+    public String retrieveData() {
+        sharedPreferences = getSharedPreferences("saveData", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("wristCircumference", null);
+    }
+
     private void showCalculatedResults() {
         ResultsGridAdapter gridAdapter = new ResultsGridAdapter(this, results);
         gridView.setAdapter(gridAdapter);
@@ -95,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("DefaultLocale")
     private String calculateCircumference(double factor) {
-        double chestCircumference = wristCircumferenceValue * WRIST_TO_CHEST;
+        double chestCircumference = Double.parseDouble(wristCircumferenceValue) * WRIST_TO_CHEST;
         return String.format("%.1f", chestCircumference * factor);
     }
 }
