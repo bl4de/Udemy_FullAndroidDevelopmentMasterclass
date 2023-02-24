@@ -34,6 +34,7 @@ public class FileHelper {
             ObjectInputStream ois = new ObjectInputStream(fis);
             itemList = (ArrayList<String>) ois.readObject();
         } catch (FileNotFoundException e) {
+            itemList = new ArrayList<>();
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
