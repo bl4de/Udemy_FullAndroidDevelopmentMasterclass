@@ -27,5 +27,13 @@ public class MainActivity extends AppCompatActivity {
         add = findViewById(R.id.button);
         listView = findViewById(R.id.list);
 
+        itemList = FileHelper.readData(this);
+        arrayAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                itemList
+        );
+        listView.setAdapter(arrayAdapter);
     }
 }
