@@ -2,12 +2,14 @@ package com.androidcourse.mathgame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 import java.util.Random;
@@ -33,6 +35,8 @@ public class Game extends AppCompatActivity {
     int userScore = 0;
     int userLife = 3;
 
+    String gameType = "addition";
+
     CountDownTimer timer;
     private static final long START_TIMER_IN_MILIS = 10000;
     Boolean timer_running;
@@ -53,7 +57,10 @@ public class Game extends AppCompatActivity {
         ok = findViewById(R.id.buttonOk);
         next = findViewById(R.id.buttonNext);
 
-        gameContinue();
+        Intent intent = getIntent();
+        gameType = intent.getStringExtra("gameType");
+
+        gameContinue(gameType);
 
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,16 +83,43 @@ public class Game extends AppCompatActivity {
             public void onClick(View view) {
                 answer.setText("");
                 resetTimer();
-                gameContinue();
+
+                if (userLife <= 0) {
+                    Toast.makeText(Game.this, "Game Over!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Game.this, Result.class);
+                    intent.putExtra("score", userScore);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    gameContinue(gameType);
+                }
             }
         });
     }
 
-    public void gameContinue() {
+    public void gameContinue(String gameType) {
         number1 = random.nextInt(100);
         number2 = random.nextInt(100);
-        realAnswer = number1 + number2;
-        question.setText(number1 + " + " + number2);
+
+        switch (gameType) {
+            case "addition": {
+                realAnswer = number1 + number2;
+                question.setText(number1 + " + " + number2);
+            }
+            break;
+            case "multiplication": {
+                realAnswer = number1 * number2;
+                question.setText(number1 + " * " + number2);
+            }
+            break;
+            case "substraction": {
+                realAnswer = number1 - number2;
+                question.setText(number1 + " - " + number2);
+            }
+            break;
+            default:
+                break;
+        }
         startTimer();
     }
 
@@ -112,7 +146,7 @@ public class Game extends AppCompatActivity {
     }
 
     public void updateText() {
-        int second = (int)(time_left_in_milis / 1000) % 60;
+        int second = (int) (time_left_in_milis / 1000) % 60;
         String time_left = String.format(Locale.getDefault(), "%02d", second);
         time.setText(time_left);
     }

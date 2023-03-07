@@ -26,7 +26,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Game.class);
+                intent.putExtra("gameType", "addition");
                 startActivity(intent);
+                finish();
+            }
+        });
+        substraction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Game.class);
+                intent.putExtra("gameType", "substraction");
+                startActivity(intent);
+                finish();
+            }
+        });
+        multi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Game.class);
+                intent.putExtra("gameType", "multiplication");
+                startActivity(intent);
+                finish();
             }
         });
     }
